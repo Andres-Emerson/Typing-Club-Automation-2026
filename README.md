@@ -78,19 +78,15 @@ The script:
 1. Open the supported typing page.
 2. Open browser developer tools.
 3. Navigate to **Console**.
-4. Paste the script.
-5. Execute.
-
----
-
-## Project Structure
+4. If the browser shows a warning preventing paste actions, type:
 
 ```text
-Typing-Club-Automation/
-│
-├── automation.js
-└── README.md
+allow pasting
 ```
+
+and press **Enter**.
+5. Paste the script.
+6. Execute.
 
 ---
 
