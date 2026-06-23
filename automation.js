@@ -157,10 +157,23 @@ async function runStandard(input, text, nativeSetter) {
   }
 }
 
-async function runGlobos(input, nativeSetter) {
-  let textoCompleto = '';
-  let letrasEscritas = 0;
-  let sinCambios = 0;
+async function readBalloons() {
+  const excluded = ['balloon-count', 'balloon-glow', 'balloon-ray', 'balloon-cursor'];
+  const game = Phaser.GAMES[0];
+  return game.world.children
+    .filter(x => {
+      const key = String(x.key || '');
+      return key.includes('balloon-') && x.children?.[0]?.text && !excluded.includes(key);
+    })
+    .sort((a, b) => (a.x ?? a.position?.x ?? 0) - (b.x ?? b.position?.x ?? 0))
+    .map(x => x.children[0].text)
+    .join('');
+}
+
+async function runBalloons(input, nativeSetter) {
+  let fullText = '';
+  let typedLetters = 0;
+  let unchanged = 0;
 
   if (nativeSetter) nativeSetter.call(input, '');
   else input.value = '';
@@ -169,31 +182,31 @@ async function runGlobos(input, nativeSetter) {
   await sleep(400 + Math.random() * 600);
 
   while (true) {
-    const ventana = await leerGlobos();
+    const windowText = await readBalloons();
 
-    if (!ventana) {
-      if (++sinCambios > 5) break;
+    if (!windowText) {
+      if (++unchanged > 5) break;
       await sleep(300);
       continue;
     }
-    sinCambios = 0;
+    unchanged = 0;
 
-    if (!textoCompleto) {
-      textoCompleto = ventana;
+    if (!fullText) {
+      fullText = windowText;
     } else {
       let overlap = 0;
-      for (let i = Math.min(textoCompleto.length, ventana.length); i > 0; i--) {
-        if (textoCompleto.slice(-i) === ventana.slice(0, i)) { overlap = i; break; }
+      for (let i = Math.min(fullText.length, windowText.length); i > 0; i--) {
+        if (fullText.slice(-i) === windowText.slice(0, i)) { overlap = i; break; }
       }
-      const nuevo = ventana.slice(overlap);
-      if (nuevo) textoCompleto += nuevo;
+      const newText = windowText.slice(overlap);
+      if (newText) fullText += newText;
     }
 
-    while (letrasEscritas < textoCompleto.length) {
-      const letra = textoCompleto[letrasEscritas];
-      await typeKey(input, letra, nativeSetter);
-      letrasEscritas++;
-      await sleep(humanDelay(letra, letrasEscritas, textoCompleto.length));
+    while (typedLetters < fullText.length) {
+      const letter = fullText[typedLetters];
+      await typeKey(input, letter, nativeSetter);
+      typedLetters++;
+      await sleep(humanDelay(letter, typedLetters, fullText.length));
     }
 
     await sleep(80);
@@ -202,25 +215,25 @@ async function runGlobos(input, nativeSetter) {
 
 async function run() {
   const input = document.querySelector('input');
-  if (!input) { console.error('Input no encontrado'); return; }
+  if (!input) { console.error('Input not found'); return; }
 
   const nativeSetter = Object.getOwnPropertyDescriptor(
     window.HTMLInputElement.prototype, 'value'
   )?.set;
 
   const game = detectGame();
-  if (!game) { console.error('Juego no reconocido'); return; }
+  if (!game) { console.error('Game not recognized'); return; }
 
   input.focus();
 
   if (game === 'globos') {
     while (true) {
-      await runGlobos(input, nativeSetter);
+      await runBalloons(input, nativeSetter);
       await sleep(800 + Math.random() * 400);
     }
   } else {
     const text = game === 'token' ? getTextToken() : getTextGeneric(game.split(':')[1]);
-    if (!text) { console.error('No se pudo leer el texto'); return; }
+    if (!text) { console.error('Could not read text'); return; }
     await runStandard(input, text, nativeSetter);
   }
 }
