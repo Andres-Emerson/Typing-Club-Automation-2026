@@ -85,6 +85,7 @@ allow pasting
 ```
 
 and press **Enter**.
+
 5. Paste the script.
 6. Execute.
 
