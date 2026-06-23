@@ -1,4 +1,16 @@
+<div align="center">
+
 # Typing-Club-Automation 2026
+
+Automated typing utility built in JavaScript
+
+<br>
+
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2023-yellow)
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+</div>
 
 Automated typing utility built in JavaScript for browser execution.
 
@@ -87,14 +99,6 @@ Typing-Club-Automation/
 * Intended for educational and experimentation purposes.
 * Timing behavior may vary depending on browser and page updates.
 * Compatibility depends on the structure of the target page.
-
----
-
-## Author
-
-Developed by **Andres**
-
-GitHub: `@Andres`
 
 ---
 
