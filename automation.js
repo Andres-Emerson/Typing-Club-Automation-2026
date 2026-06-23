@@ -1,11 +1,9 @@
-// zMTypingClub Automation — by Andres
-//
 // CONFIG:
-//   minDelay / maxDelay  — rango de velocidad en ms por tecla
-//                          80-200  = rapido con naturalidad
-//                          110-215 = velocidad humana comoda
-//   enableMistakes       — simular errores humanos (true/false)
-//   mistakeChance        — probabilidad de error: 0.03 = 3%, 0.09 = 9%
+//   minDelay / maxDelay  — typing speed range in ms per key
+//                          80-200  = fast with natural timing
+//                          110-215 = comfortable human typing speed
+//   enableMistakes       — simulate human mistakes (true/false)
+//   mistakeChance        — mistake probability: 0.03 = 3%, 0.09 = 9%
 
 const CONFIG = {
   minDelay: 80,
