@@ -1,104 +1,81 @@
-<div align="center">
+# Typing Club zMBot v5.0
 
-# Typing-Club-Automation 2026
+## Overview
 
-Automated typing utility built in JavaScript
+Automated typing utility for TypingClub.com with graphical interface, multi-game support, and realistic typing simulation.
 
-<br>
-
-![JavaScript](https://img.shields.io/badge/JavaScript-ES2023-yellow)
-![Status](https://img.shields.io/badge/status-active-success)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
-</div>
-
-Automated typing utility built in JavaScript for browser execution.
-
-Typing-Club-Automation reads available lesson content and simulates realistic keyboard input with configurable delays and optional human-like typing behavior.
+---
 
 ## Features
 
-* Automatic text detection across multiple lesson formats
-* Human-like typing speed simulation
-* Configurable typing delay range
-* Optional typo generation and correction
-* Dynamic handling for different lesson layouts
-* Automatic key event dispatching
-* Lightweight single-file implementation
+- **Multi-game support**: Balloons, Token, generic typing games
+- **Realistic typing**: Configurable speed (30-190 WPM) and accuracy (92-100%)
+- **Auto-advance**: Automatic lesson progression
+- **GUI**: Draggable window with live statistics
+- **Anchor key support**: Handles left/right anchor lessons
 
 ---
 
-## Configuration
+## Quick Start
 
-Adjust the `CONFIG` object to customize behavior:
+1. Go to TypingClub.com
+2. Open browser console (F12)
+3. If paste is blocked, type `allow pasting` and press Enter
+4. Paste the script and press Enter
+5. Click "Start Bot" to begin
 
-```js
-const CONFIG = {
-  minDelay: 80,
-  maxDelay: 215,
-  enableMistakes: true,
-  mistakeChance: 0.03,
-};
+---
+
+## Controls
+
+| Control | Function |
+|---------|----------|
+| Speed slider | Adjust typing speed (30-190 WPM) |
+| Accuracy slider | Adjust error rate (92-100%) |
+| Auto-advance | Toggle automatic lesson progression |
+| Start Bot | Begin automation |
+| Stop Bot | Halt automation |
+| Double-click header | Pin/unpin GUI |
+| × button | Close bot |
+
+---
+
+## Supported Games
+
+- Balloons (Phaser engine)
+- Token
+- Generic typing lessons
+- Instruction screens (auto-skipped)
+- Anchor key lessons
+
+---
+
+## Programmatic Control
+
+```javascript
+window.typingClubBot.start();  // Start bot
+window.typingClubBot.stop();   // Stop bot
+window.typingClubBot.close();  // Close bot
 ```
 
-### Parameters
+---
 
-| Setting          | Description                           |
-| ---------------- | ------------------------------------- |
-| `minDelay`       | Minimum delay between keystrokes (ms) |
-| `maxDelay`       | Maximum delay between keystrokes (ms) |
-| `enableMistakes` | Enables typo simulation               |
-| `mistakeChance`  | Probability of generating a typo      |
+## Requirements
 
-### Recommended Values
-
-| Profile  | Delay        |
-| -------- | ------------ |
-| Fast     | `80–200 ms`  |
-| Balanced | `110–215 ms` |
-| Slow     | `160–280 ms` |
+- Chrome/Chromium browser
+- Active TypingClub lesson page
+- JavaScript enabled
 
 ---
 
-## How It Works
+## Limitations
 
-The script:
-
-1. Detects the active typing environment
-2. Extracts visible lesson characters
-3. Generates keyboard events
-4. Applies configurable timing variation
-5. Optionally introduces and corrects typing mistakes
-6. Completes the detected lesson text
-
----
-
-## Usage
-
-1. Open the supported typing page.
-2. Open browser developer tools.
-3. Navigate to **Console**.
-4. If the browser shows a warning preventing paste actions, type:
-
-```text
-allow pasting
-```
-
-and press **Enter**.
-
-5. Paste the script.
-6. Execute.
-
----
-
-## Notes
-
-* Intended for educational and experimentation purposes.
-* Timing behavior may vary depending on browser and page updates.
-* Compatibility depends on the structure of the target page.
+- Designed exclusively for TypingClub.com
+- Browser-dependent
+- Relies on specific DOM structure
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License**.
+MIT License
